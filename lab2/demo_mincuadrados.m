@@ -74,6 +74,7 @@ varn = 0.015;
 noise = sqrt(varn)*randn(length(y),1);
 yn = y + noise;
 [ye,w] = linealmincua(X,yn);
+disp(w)
 
 plot(X,yn,'k.')
 hold on
@@ -128,7 +129,7 @@ title('Valores propios matriz - \Phi^T\Phi','FontSize',14)
 
 
 figure
-[~,Val] = eig(C0+lambda*eye(size(C0))); 
+[~,Val] = eig(C0+lambda*eye(size(C0)));
 imagesc(C0+lambda*eye(size(C0))), colorbar
 xlabel('caracterisitica','FontSize',14)
 ylabel('caracteristica','FontSize',14)
