@@ -1,0 +1,148 @@
+%% This is file `elsarticle-template-1-num.tex',
+%%
+%% Copyright 2009 Elsevier Ltd
+%%
+%% This file is part of the 'Elsarticle Bundle'.
+%% ---------------------------------------------
+%%
+%% It may be distributed under the conditions of the LaTeX Project Public
+%% License, either version 1.2 of this license or (at your option) any
+%% later version.  The latest version of this license is in
+%%    http://www.latex-project.org/lppl.txt
+%% and version 1.2 or later is part of all distributions of LaTeX
+%% version 1999/12/01 or later.
+%%
+%% Template article for Elsevier's document class `elsarticle'
+%% with numbered style bibliographic references
+%%
+%% $Id: elsarticle-template-1-num.tex 149 2009-10-08 05:01:15Z rishi $
+%% $URL: http://lenova.river-valley.com/svn/elsbst/trunk/elsarticle-template-1-num.tex $
+%%
+\documentclass[preprint,12pt]{elsarticle}
+
+%% Use the option review to obtain double line spacing
+%% \documentclass[preprint,review,12pt]{elsarticle}
+
+%% Use the options 1p,twocolumn; 3p; 3p,twocolumn; 5p; or 5p,twocolumn
+%% for a journal layout:
+%% \documentclass[final,1p,times]{elsarticle}
+%% \documentclass[final,1p,times,twocolumn]{elsarticle}
+%% \documentclass[final,3p,times]{elsarticle}
+%% \documentclass[final,3p,times,twocolumn]{elsarticle}
+%% \documentclass[final,5p,times]{elsarticle}
+%% \documentclass[final,5p,times,twocolumn]{elsarticle}
+
+%% The graphicx package provides the includegraphics command.
+\usepackage{graphicx}
+%% The amssymb package provides various useful mathematical symbols
+\usepackage{amssymb}
+%% The amsthm package provides extended theorem environments
+%% \usepackage{amsthm}
+
+\usepackage{lineno}
+\usepackage{hyperref}
+
+\journal{Universidad Tecnologica de pereira}
+
+\begin{document}
+
+\begin{frontmatter}
+
+%% Title, authors and addresses
+
+\title{Predict email opens}
+
+\author{Manuel Felipe Pineda}
+
+\address{Universidad Tecnologica de Pereira}
+
+\begin{abstract}
+  I this lab I will try to train a system with given
+  metadata for emails sent to users in order to predict whether
+  or not a future email will be opened for each user.
+
+  This metadata contains specific information about:
+
+  \begin{itemize}
+    \item The user the email was sent to.
+    \item The email that was sent.
+    \item The user's reaction to the email, including
+      (among other things) whether or not the user
+      opened the email.
+  \end{itemize}
+
+  This metadata was taken from the emails sent to
+  hackerrank users over a certain period of time.
+
+  The proyect is based in a real competition that can be found
+  \href{https://www.hackerrank.com/contests/machine-learning-codesprint/challenges/hackerrank-predict-email-opens}{here}
+\end{abstract}
+
+\begin{keyword}
+Data Science \sep Machine learning \sep Complicated
+%% keywords here, in the form: keyword \sep keyword
+
+%% MSC codes here, in the form: \MSC code \sep code
+%% or \MSC[2008] code \sep code (2000 is the default)
+
+\end{keyword}
+
+\end{frontmatter}
+
+%%
+%% Start line numbering here if you want
+%%
+% \linenumbers
+
+%% main text
+\section{split data}
+\label{split:1}
+random
+
+\section{model validation}
+- diferences
+
+- F1 score
+
+\section{strategies}
+\label{strategy:1}
+
+\subsection{Random}
+
+- score with prob 0.5:
+48625 differences: 0.497 \% per ok \\
+F1 score 0.392 \\
+
+- prob 0.7:
+54999 differences: 0.431 \% per ok \\
+F1 score 0.447
+
+\subsection{counting}
+
+53569 differences: 0.445 \% per ok \\
+F1 score 0.443
+
+\bibliographystyle{model1-num-names}
+\bibliography{sample.bib}
+
+%% Authors are advised to submit their bibtex database files. They are
+%% requested to list a bibtex style file in the manuscript if they do
+%% not want to use model1-num-names.bst.
+
+%% References without bibTeX database:
+
+% \begin{thebibliography}{00}
+
+%% \bibitem must have the following form:
+%%   \bibitem{key}...
+%%
+
+% \bibitem{}
+
+% \end{thebibliography}
+
+
+\end{document}
+
+%%
+%% End of file `elsarticle-template-1-num.tex'.

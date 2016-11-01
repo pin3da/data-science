@@ -1,0 +1,6 @@
+*.log
+*.out
+*.spl
+*.aux
+data
+data2
