@@ -55,6 +55,24 @@ Universidad Tecnologica de Pereira}
   \footnote{Intel(R) Core(TM) i5-4300U CPU}
 }
 
+\frame{
+  \frametitle{Dimensionality reduction}
+  \begin{columns}
+\column{0.5\textwidth}
+  \begin{figure}
+    \centering
+    \includegraphics[width=0.9\textwidth]{../img/pca.png}
+    \caption{\label{fig:pca} PCA}
+  \end{figure}
+\column{0.5\textwidth}
+  \begin{figure}
+    \centering
+    \includegraphics[width=0.9\textwidth]{../img/kpca.png}
+    \caption{\label{fig:kpca} Kernel - PCA}
+  \end{figure}
+\end{columns}
+}
+
 \section{Estimators}
 
 \frame[allowframebreaks]{
@@ -112,11 +130,11 @@ Universidad Tecnologica de Pereira}
 \frame{
   \frametitle{Tuning hyperparameters}
   The method Exhaustive Grid Search was used to optimize
-  the hyperparameters of the best estimators
+  the hyperparameters of the best estimators (f1-score)
   \begin{itemize}
-    \item Multilayer Perceptron
-    \item K Neighbors
-    \item Extra Trees Classifier
+    \item Multilayer Perceptron: 0.5
+    \item K Neighbors: 0.41
+    \item Extra Trees Classifier: 0.51
   \end{itemize}
 }
 
@@ -149,7 +167,7 @@ Universidad Tecnologica de Pereira}
 \frame[allowframebreaks]{
   \frametitle{References}
   {\scriptsize
-  \bibliography{mybib}{}
+    \bibliography{mybib}{}
   }
   \bibliographystyle{unsrt}
 }
