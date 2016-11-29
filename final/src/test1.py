@@ -1,16 +1,34 @@
 #! /usr/bin/python3
 
 import numpy as np
-import pandas as pd
 
-data = pd.read_csv('../data2/test.csv')
-part = data['contest_participation_count_30_days'].as_matrix()
-ans = (np.random.rand(data.shape[0]) < 0.8).astype('int64')
-ids = part > 0
+from time import time
+from sklearn.cluster import MiniBatchKMeans
+from sklearn.metrics.cluster import v_measure_score
+from sklearn.metrics import f1_score
+from sklearn.model_selection import train_test_split
+from sklearn.model_selection import cross_val_score
+from sklearn.model_selection import StratifiedKFold
 
-for i in range(data.shape[0]):
-    if (ids[i]):
-        ans[i] = np.random.rand() < 0.9
+X = np.loadtxt('../data.txt')
+Y = np.loadtxt('../label.txt')
 
-for i in ans:
-   print (i)
+X = np.nan_to_num(X)
+
+kmeans = MiniBatchKMeans(n_clusters=2, batch_size=2000,
+                         random_state=0)
+
+print ("MiniBatchKMeans...")
+start_time = time()
+y_kmeans = kmeans.fit_predict(X)
+print ("Done in {:.2f}s. V-measure: {:.4f}".format(
+    time() - start_time,
+    v_measure_score(Y, y_kmeans)))
+
+print ("F1 score {:.4f}".format(f1_score(Y, y_kmeans, average='weighted')))
+
+
+skf = StratifiedKFold(n_splits=10, shuffle=True)
+scores = cross_val_score(kmeans, X, Y, cv=skf, scoring='f1_weighted')
+print (scores)
+print("Accuracy: %0.2f (+/- %0.2f)" % (scores.mean(), scores.std() * 2))

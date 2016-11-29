@@ -1,0 +1,7 @@
+*.aux
+*.bbl
+*.blg
+*.log
+*.out
+final/training_dataset.csv
+final/train.csv
