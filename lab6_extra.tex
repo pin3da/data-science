@@ -1,0 +1,808 @@
+\documentclass[a4paper]{article}
+
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage{cite}
+\usepackage{float}
+\usepackage{hyperref}
+
+\title{Laboratorio 6 - ciencia de datos}
+
+\author{Manuel Felipe Pineda L ~ 1093223607}
+
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\section{Base de Datos ``segment''}
+
+Se utilizó la base de datos ``segment'' con las versiones
+provistas para entrenamiento y clasificación.
+
+En esta base de datos se entregan diferentes caracteristicas
+de un conjunto de instancias (regiones de 3x3 pixeles de una
+imagen ) y se busca identificar a que segmento corresponde
+cada una de estas instancias.
+
+\subsection{Tecnicas a utilizar}
+En esta seccion se evaluan diferentes clasificadores
+para evaluar su desempeno con respecto a la base de datos.
+
+Para cada clasificador se registran los tiempos de construccion
+y evaluacion del modelo. Tambien se registraran la cantidad
+de instacias clasificadas correctamente.
+
+\subsubsection{Clasificacion - Naive Bayes Updateable}
+
+\begin{verbatim}
+Time taken to build model: 0.05 seconds
+Time taken to test model : 0.11 seconds
+
+=== Summary ===
+
+Correctly Classified Instances         624               77.037  %
+Incorrectly Classified Instances       186               22.963  %
+Kappa statistic                          0.7316
+Mean absolute error                      0.0659
+Root mean squared error                  0.2464
+Relative absolute error                 26.8912 %
+Root relative squared error             70.3431 %
+Total Number of Instances              810
+
+=== Confusion Matrix ===
+
+   a   b   c   d   e   f   g   <-- classified as
+ 119   0   0   1   5   0   0 |   a = brickface
+   0 109   0   1   0   0   0 |   b = sky
+   3   0  17   1 101   0   0 |   c = foliage
+   9   0   1  97   0   3   0 |   d = cement
+  30   0   6  15  75   0   0 |   e = window
+   0   0   1   5   0  88   0 |   f = path
+   0   0   1   0   3   0 119 |   g = grass
+
+\end{verbatim}
+
+\subsubsection{Clasificacion - Logistic}
+\begin{verbatim}
+Time taken to build model: 6.81 seconds
+Time taken to test model : 0.04 seconds
+
+=== Summary ===
+
+Correctly Classified Instances         758               93.5802 %
+Incorrectly Classified Instances        52                6.4198 %
+Kappa statistic                          0.925
+Mean absolute error                      0.0206
+Root mean squared error                  0.1148
+Relative absolute error                  8.414  %
+Root relative squared error             32.7642 %
+Total Number of Instances              810
+
+=== Confusion Matrix ===
+
+   a   b   c   d   e   f   g   <-- classified as
+ 123   0   0   0   2   0   0 |   a = brickface
+   0 110   0   0   0   0   0 |   b = sky
+   1   0 112   1   8   0   0 |   c = foliage
+   2   0   0 102   5   1   0 |   d = cement
+   1   0  15  11  98   0   1 |   e = window
+   0   0   0   0   0  94   0 |   f = path
+   0   0   2   0   0   2 119 |   g = grass
+
+\end{verbatim}
+
+\subsubsection{Clasificacion - Multilayer Perceptron}
+\begin{verbatim}
+Time taken to build model: 5.32 seconds
+Time taken to test model : 0.03 seconds
+
+=== Summary ===
+
+Correctly Classified Instances         769               94.9383 %
+Incorrectly Classified Instances        41                5.0617 %
+Kappa statistic                          0.9409
+Mean absolute error                      0.0177
+Root mean squared error                  0.1082
+Relative absolute error                  7.2247 %
+Root relative squared error             30.8905 %
+Total Number of Instances              810
+
+=== Confusion Matrix ===
+
+   a   b   c   d   e   f   g   <-- classified as
+ 123   0   0   2   0   0   0 |   a = brickface
+   0 110   0   0   0   0   0 |   b = sky
+   1   0 109   1  11   0   0 |   c = foliage
+   0   0   1 107   1   1   0 |   d = cement
+   3   0   8   9 106   0   0 |   e = window
+   0   0   0   0   0  94   0 |   f = path
+   0   0   1   0   0   2 120 |   g = grass
+
+
+\end{verbatim}
+
+
+\subsubsection{Classificacion - KStar}
+Usa la entropia como medida de similitud. Se basa en
+las instancias.
+\begin{verbatim}
+Time taken to build model: 0 seconds
+Time taken to test model : 27.21 seconds
+
+=== Summary ===
+
+Correctly Classified Instances         781               96.4198 %
+Incorrectly Classified Instances        29                3.5802 %
+Kappa statistic                          0.9582
+Mean absolute error                      0.0101
+Root mean squared error                  0.0862
+Relative absolute error                  4.1092 %
+Root relative squared error             24.6    %
+Total Number of Instances              810
+
+=== Confusion Matrix ===
+
+   a   b   c   d   e   f   g   <-- classified as
+ 125   0   0   0   0   0   0 |   a = brickface
+   0 110   0   0   0   0   0 |   b = sky
+   0   0 117   1   4   0   0 |   c = foliage
+   2   0   0 103   3   2   0 |   d = cement
+   1   0   8   5 112   0   0 |   e = window
+   0   0   0   0   0  94   0 |   f = path
+   0   0   0   3   0   0 120 |   g = grass
+
+\end{verbatim}
+
+\subsubsection{Clasificacion - K-neighbors classifier}
+
+linear
+\begin{verbatim}
+Time taken to build model: 0 seconds
+Time taken to test model : 0.12 seconds
+
+=== Summary ===
+
+Correctly Classified Instances         776               95.8025 %
+Incorrectly Classified Instances        34                4.1975 %
+Kappa statistic                          0.951
+Mean absolute error                      0.013
+Root mean squared error                  0.1093
+Relative absolute error                  5.318  %
+Root relative squared error             31.1994 %
+Total Number of Instances              810
+
+=== Confusion Matrix ===
+
+   a   b   c   d   e   f   g   <-- classified as
+ 124   0   0   0   1   0   0 |   a = brickface
+   0 110   0   0   0   0   0 |   b = sky
+   0   0 116   0   6   0   0 |   c = foliage
+   1   0   1 103   5   0   0 |   d = cement
+   2   0   7   8 109   0   0 |   e = window
+   0   0   0   0   0  94   0 |   f = path
+   0   0   0   1   1   1 120 |   g = grass
+
+\end{verbatim}
+
+\subsection{Observacion}
+
+En este caso se puede notar que la clasificacion basada
+en las muestras, obtiene un mejor desempeno. Esto es debido
+a la naturaleza del problema, es muy probable que
+instancias que correspondan al mismo segmento esten ubicados
+en lugares cercanos en la imagen.
+
+\subsection{Clasificacion basada en muestras}
+
+En esta seccion se modifican algunos parametros de los metodos
+que buscan similitud entre las muestras. Tambien se compara
+con algunos metodos de clustering.
+
+\subsubsection {Kstar}
+Usando global bend = 50.
+\begin{verbatim}
+Time taken to build model: 0 seconds
+
+=== Evaluation on test set ===
+
+Time taken to test model on supplied test set: 27.8 seconds
+
+=== Summary ===
+
+Correctly Classified Instances         787               97.1605 %
+Incorrectly Classified Instances        23                2.8395 %
+Kappa statistic                          0.9668
+Mean absolute error                      0.0173
+Root mean squared error                  0.0863
+Relative absolute error                  7.0673 %
+Root relative squared error             24.6467 %
+Total Number of Instances              810
+
+=== Detailed Accuracy By Class ===
+
+                 TP Rate  FP Rate  Precision  Recall   F-Measure  MCC      ROC Area  PRC Area  Class
+                 1.000    0.004    0.977      1.000    0.988      0.986    1.000     1.000     brickface
+                 1.000    0.000    1.000      1.000    1.000      1.000    1.000     1.000     sky
+                 0.975    0.010    0.944      0.975    0.960      0.953    0.998     0.990     foliage
+                 0.945    0.007    0.954      0.945    0.950      0.942    0.997     0.979     cement
+                 0.913    0.009    0.950      0.913    0.931      0.919    0.995     0.977     window
+                 1.000    0.003    0.979      1.000    0.989      0.988    1.000     1.000     path
+                 0.976    0.000    1.000      0.976    0.988      0.986    0.999     0.997     grass
+Weighted Avg.    0.972    0.005    0.972      0.972    0.971      0.967    0.998     0.992
+
+=== Confusion Matrix ===
+
+   a   b   c   d   e   f   g   <-- classified as
+ 125   0   0   0   0   0   0 |   a = brickface
+   0 110   0   0   0   0   0 |   b = sky
+   0   0 119   0   3   0   0 |   c = foliage
+   1   0   0 104   3   2   0 |   d = cement
+   1   0   7   3 115   0   0 |   e = window
+   0   0   0   0   0  94   0 |   f = path
+   1   0   0   2   0   0 120 |   g = grass
+
+\end{verbatim}
+
+\subsubsection{KNeighbors - Ball Tree}
+\begin{verbatim}
+Time taken to build model: 0.08 seconds
+Time taken to test model : 0.13 seconds
+
+=== Summary ===
+
+Correctly Classified Instances         776               95.8025 %
+Incorrectly Classified Instances        34                4.1975 %
+Kappa statistic                          0.951
+Mean absolute error                      0.013
+Root mean squared error                  0.1093
+Relative absolute error                  5.318  %
+Root relative squared error             31.1994 %
+Total Number of Instances              810
+
+=== Confusion Matrix ===
+
+   a   b   c   d   e   f   g   <-- classified as
+ 124   0   0   0   1   0   0 |   a = brickface
+   0 110   0   0   0   0   0 |   b = sky
+   0   0 116   0   6   0   0 |   c = foliage
+   1   0   1 103   5   0   0 |   d = cement
+   2   0   7   8 109   0   0 |   e = window
+   0   0   0   0   0  94   0 |   f = path
+   0   0   0   1   1   1 120 |   g = grass
+
+\end{verbatim}
+\subsubsection{KNeighbors - Cover Tree}
+\begin{verbatim}
+Time taken to build model: 0.07 seconds
+Time taken to test model : 0.18 seconds
+
+=== Summary ===
+
+Correctly Classified Instances         773               95.4321 %
+Incorrectly Classified Instances        37                4.5679 %
+Kappa statistic                          0.9466
+Mean absolute error                      0.0179
+Root mean squared error                  0.1061
+Relative absolute error                  7.2906 %
+Root relative squared error             30.2851 %
+Total Number of Instances              810
+
+=== Confusion Matrix ===
+
+   a   b   c   d   e   f   g   <-- classified as
+ 123   0   0   0   2   0   0 |   a = brickface
+   0 110   0   0   0   0   0 |   b = sky
+   0   0 112   0  10   0   0 |   c = foliage
+   1   0   1 102   5   1   0 |   d = cement
+   2   0   6   6 112   0   0 |   e = window
+   0   0   0   0   0  94   0 |   f = path
+   0   0   1   1   0   1 120 |   g = grass
+
+\end{verbatim}
+
+\subsubsection{KNeighbors KD Tree}
+
+\begin{verbatim}
+Time taken to build model: 0.02 seconds
+Time taken to test model : 0.03 seconds
+
+=== Summary ===
+
+Correctly Classified Instances         767               94.6914 %
+Incorrectly Classified Instances        43                5.3086 %
+Kappa statistic                          0.938
+Mean absolute error                      0.0159
+Root mean squared error                  0.1102
+Relative absolute error                  6.4737 %
+Root relative squared error             31.4677 %
+Total Number of Instances              810
+
+=== Confusion Matrix ===
+
+   a   b   c   d   e   f   g   <-- classified as
+ 124   0   0   0   1   0   0 |   a = brickface
+   0 110   0   0   0   0   0 |   b = sky
+   0   0 116   0   6   0   0 |   c = foliage
+   1   0   2 103   4   0   0 |   d = cement
+   4   0  10  12 100   0   0 |   e = window
+   0   0   0   0   0  94   0 |   f = path
+   0   0   2   1   0   0 120 |   g = grass
+
+\end{verbatim}
+
+\subsubsection{Clustering - EM}
+
+\begin{verbatim}
+Time taken to build model (full training data) : 0.42 seconds
+
+=== Model and evaluation on training set ===
+
+Clustered Instances
+
+0       214 ( 14%) 125
+1       207 ( 14%) 110
+2       132 (  9%) 122
+3       186 ( 12%) 110
+4       178 ( 12%) 126
+5       217 ( 14%) 94
+6       366 ( 24%) 123
+
+
+Log likelihood: -25.55882
+
+\end{verbatim}
+
+
+\subsubsection{Hierarchical clustering}
+
+\begin{verbatim}
+Time taken to build model (full training data) : 0.04 seconds
+
+=== Evaluation on test set ===
+Clustered Instances
+
+0      205 ( 25%) 125
+1      123 ( 15%) 110
+2      110 ( 14%) 122
+3       44 (  5%) 110
+4       50 (  6%) 126
+5      154 ( 19%) 94
+6      124 ( 15%) 123
+
+\end{verbatim}
+
+\subsection{Base de datos 'glass'}
+
+\subsubsection{cluster - canopy}
+
+\begin{verbatim}
+Time taken to build model (full training data) : 0.01 seconds
+
+=== Model and evaluation on training set ===
+
+Clustered Instances
+
+0      163 ( 76%)
+1       35 ( 16%)
+2       14 (  7%)
+3        2 (  1%)
+
+
+Class attribute: Type
+Classes to Clusters:
+
+  0  1  2  3  <-- assigned to cluster
+ 70  0  0  0 | build wind float
+ 65 10  1  0 | build wind non-float
+ 17  0  0  0 | vehic wind float
+  0  0  0  0 | vehic wind non-float
+  2  8  1  2 | containers
+  5  4  0  0 | tableware
+  4 13 12  0 | headlamps
+
+Cluster 0 <-- build wind float
+Cluster 1 <-- build wind non-float
+Cluster 2 <-- headlamps
+Cluster 3 <-- containers
+
+Incorrectly clustered instances :	120.0	 56.0748 %
+\end{verbatim}
+
+\subsubsection{cluster - coweb}
+
+\begin{verbatim}
+Time taken to build model (full training data) : 0.06 seconds
+
+=== Model and evaluation on training set ===
+
+Clustered Instances
+
+ 1      175 ( 82%)
+ 3        7 (  3%)
+ 4       24 ( 11%)
+ 7        3 (  1%)
+10        4 (  2%)
+11        1 (  0%)
+
+
+Class attribute: Type
+Classes to Clusters:
+
+  1  3  4  7 10 11  <-- assigned to cluster
+ 70  0  0  0  0  0 | build wind float
+ 68  2  0  1  4  1 | build wind non-float
+ 17  0  0  0  0  0 | vehic wind float
+  0  0  0  0  0  0 | vehic wind non-float
+  7  3  1  2  0  0 | containers
+  7  1  1  0  0  0 | tableware
+  6  1 22  0  0  0 | headlamps
+
+Cluster  1 <-- build wind float
+Cluster  3 <-- containers
+Cluster  4 <-- headlamps
+Cluster  7 <-- No class
+Cluster 10 <-- build wind non-float
+Cluster 11 <-- No class
+
+Incorrectly clustered instances :	115.0	 53.7383 %
+\end{verbatim}
+
+\subsubsection{cluster - EM}
+
+\begin{verbatim}
+Time taken to build model (full training data) : 0.64 seconds
+
+=== Model and evaluation on training set ===
+
+Clustered Instances
+
+0       75 ( 35%)
+1      139 ( 65%)
+
+
+Log likelihood: 2.67064
+
+
+Class attribute: Type
+Classes to Clusters:
+
+  0  1  <-- assigned to cluster
+  4 66 | build wind float
+ 20 56 | build wind non-float
+  1 16 | vehic wind float
+  0  0 | vehic wind non-float
+ 13  0 | containers
+  9  0 | tableware
+ 28  1 | headlamps
+
+Cluster 0 <-- headlamps
+Cluster 1 <-- build wind float
+
+Incorrectly clustered instances :	120.0	 56.0748 %
+
+\end{verbatim}
+
+con 7 clases
+
+\begin{verbatim}
+Time taken to build model (full training data) : 0.04 seconds
+
+=== Model and evaluation on training set ===
+
+Clustered Instances
+
+0       25 ( 12%)
+1       45 ( 21%)
+2       21 ( 10%)
+3        7 (  3%)
+4       26 ( 12%)
+5       75 ( 35%)
+6       15 (  7%)
+
+
+Log likelihood: 7.87008
+
+
+Class attribute: Type
+Classes to Clusters:
+
+  0  1  2  3  4  5  6  <-- assigned to cluster
+  0 17  0  0 19 32  2 | build wind float
+  0 23 10  1  2 35  5 | build wind non-float
+  0  4  0  0  5  8  0 | vehic wind float
+  0  0  0  0  0  0  0 | vehic wind non-float
+  3  0  8  1  0  0  1 | containers
+  1  0  3  0  0  0  5 | tableware
+ 21  1  0  5  0  0  2 | headlamps
+
+Cluster 0 <-- headlamps
+Cluster 1 <-- build wind non-float
+Cluster 2 <-- containers
+Cluster 3 <-- No class
+Cluster 4 <-- vehic wind float
+Cluster 5 <-- build wind float
+Cluster 6 <-- tableware
+
+Incorrectly clustered instances :	120.0	 56.0748 %
+
+\end{verbatim}
+
+
+\subsubsection{cluster - Hierarchical}
+
+\begin{verbatim}
+
+Time taken to build model (full training data) : 0.14 seconds
+
+=== Model and evaluation on training set ===
+
+Clustered Instances
+
+0      212 ( 99%)
+1        2 (  1%)
+
+
+Class attribute: Type
+Classes to Clusters:
+
+  0  1  <-- assigned to cluster
+ 70  0 | build wind float
+ 76  0 | build wind non-float
+ 17  0 | vehic wind float
+  0  0 | vehic wind non-float
+ 11  2 | containers
+  9  0 | tableware
+ 29  0 | headlamps
+
+Cluster 0 <-- build wind non-float
+Cluster 1 <-- containers
+
+Incorrectly clustered instances :	136.0	 63.5514 %
+
+\end{verbatim}
+
+
+
+\subsubsection{cluster - Kmeans}
+
+\begin{verbatim}
+Time taken to build model (full training data) : 0 seconds
+
+=== Model and evaluation on training set ===
+
+Clustered Instances
+
+0      162 ( 76%)
+1       52 ( 24%)
+
+
+Class attribute: Type
+Classes to Clusters:
+
+  0  1  <-- assigned to cluster
+ 70  0 | build wind float
+ 65 11 | build wind non-float
+ 17  0 | vehic wind float
+  0  0 | vehic wind non-float
+  1 12 | containers
+  5  4 | tableware
+  4 25 | headlamps
+
+Cluster 0 <-- build wind float
+Cluster 1 <-- headlamps
+
+Incorrectly clustered instances :	119.0	 55.6075 %
+
+\end{verbatim}
+
+
+\subsubsection{class - logistic}
+
+\begin{verbatim}
+Correctly Classified Instances         137               64.0187 %
+Incorrectly Classified Instances        77               35.9813 %
+Kappa statistic                          0.5052
+Mean absolute error                      0.1217
+Root mean squared error                  0.2766
+Relative absolute error                 57.4847 %
+Root relative squared error             85.227  %
+Total Number of Instances              214
+
+=== Detailed Accuracy By Class ===
+
+                 TP Rate  FP Rate  Precision  Recall   F-Measure  MCC      ROC Area  PRC Area  Class
+                 0.643    0.201    0.608      0.643    0.625      0.435    0.821     0.632     build wind float
+                 0.658    0.217    0.625      0.658    0.641      0.436    0.760     0.613     build wind non-float
+                 0.118    0.025    0.286      0.118    0.167      0.140    0.796     0.294     vehic wind float
+                 0.000    0.000    0.000      0.000    0.000      0.000    ?         ?         vehic wind non-float
+                 0.692    0.030    0.600      0.692    0.643      0.620    0.807     0.451     containers
+                 0.778    0.010    0.778      0.778    0.778      0.768    0.985     0.707     tableware
+                 0.828    0.027    0.828      0.828    0.828      0.801    0.981     0.839     headlamps
+Weighted Avg.    0.640    0.151    0.625      0.640    0.629      0.487    0.825     0.619
+
+=== Confusion Matrix ===
+
+  a  b  c  d  e  f  g   <-- classified as
+ 45 19  5  0  1  0  0 |  a = build wind float
+ 19 50  0  0  3  2  2 |  b = build wind non-float
+  9  6  2  0  0  0  0 |  c = vehic wind float
+  0  0  0  0  0  0  0 |  d = vehic wind non-float
+  0  3  0  0  9  0  1 |  e = containers
+  0  0  0  0  0  7  2 |  f = tableware
+  1  2  0  0  2  0 24 |  g = headlamps
+
+\end{verbatim}
+
+
+\subsubsection{class - multilayer perceptron}
+
+\begin{verbatim}
+
+=== Stratified cross-validation ===
+=== Summary ===
+
+Correctly Classified Instances         145               67.757  %
+Incorrectly Classified Instances        69               32.243  %
+Kappa statistic                          0.5528
+Mean absolute error                      0.1114
+Root mean squared error                  0.2627
+Relative absolute error                 52.5915 %
+Root relative squared error             80.958  %
+Total Number of Instances              214
+
+=== Detailed Accuracy By Class ===
+
+                 TP Rate  FP Rate  Precision  Recall   F-Measure  MCC      ROC Area  PRC Area  Class
+                 0.743    0.181    0.667      0.743    0.703      0.548    0.862     0.643     build wind float
+                 0.684    0.217    0.634      0.684    0.658      0.460    0.815     0.741     build wind non-float
+                 0.059    0.005    0.500      0.059    0.105      0.151    0.654     0.161     vehic wind float
+                 0.000    0.000    0.000      0.000    0.000      0.000    ?         ?         vehic wind non-float
+                 0.692    0.030    0.600      0.692    0.643      0.620    0.957     0.604     containers
+                 0.778    0.020    0.636      0.778    0.700      0.689    0.926     0.514     tableware
+                 0.828    0.011    0.923      0.828    0.873      0.856    0.931     0.889     headlamps
+Weighted Avg.    0.678    0.141    0.671      0.678    0.659      0.537    0.847     0.665
+
+=== Confusion Matrix ===
+
+  a  b  c  d  e  f  g   <-- classified as
+ 52 16  1  0  0  0  1 |  a = build wind float
+ 17 52  0  0  4  3  0 |  b = build wind non-float
+  8  8  1  0  0  0  0 |  c = vehic wind float
+  0  0  0  0  0  0  0 |  d = vehic wind non-float
+  0  3  0  0  9  0  1 |  e = containers
+  0  1  0  0  1  7  0 |  f = tableware
+  1  2  0  0  1  1 24 |  g = headlamps
+
+\end{verbatim}
+
+\subsubsection{class - decision table}
+
+\begin{verbatim}
+=== Stratified cross-validation ===
+=== Summary ===
+
+Correctly Classified Instances         146               68.2243 %
+Incorrectly Classified Instances        68               31.7757 %
+Kappa statistic                          0.5507
+Mean absolute error                      0.1724
+Root mean squared error                  0.2768
+Relative absolute error                 81.4177 %
+Root relative squared error             85.2945 %
+Total Number of Instances              214
+
+=== Detailed Accuracy By Class ===
+
+                 TP Rate  FP Rate  Precision  Recall   F-Measure  MCC      ROC Area  PRC Area  Class
+                 0.886    0.264    0.620      0.886    0.729      0.585    0.839     0.670     build wind float
+                 0.671    0.167    0.689      0.671    0.680      0.507    0.792     0.720     build wind non-float
+                 0.176    0.015    0.500      0.176    0.261      0.264    0.570     0.163     vehic wind float
+                 0.000    0.000    0.000      0.000    0.000      0.000    ?         ?         vehic wind non-float
+                 0.538    0.010    0.778      0.538    0.636      0.629    0.873     0.532     containers
+                 0.667    0.010    0.750      0.667    0.706      0.695    0.853     0.514     tableware
+                 0.586    0.000    1.000      0.586    0.739      0.742    0.926     0.813     headlamps
+Weighted Avg.    0.682    0.148    0.702      0.682    0.669      0.560    0.815     0.652
+
+=== Confusion Matrix ===
+
+  a  b  c  d  e  f  g   <-- classified as
+ 62  7  1  0  0  0  0 |  a = build wind float
+ 21 51  1  0  1  2  0 |  b = build wind non-float
+ 11  3  3  0  0  0  0 |  c = vehic wind float
+  0  0  0  0  0  0  0 |  d = vehic wind non-float
+  1  5  0  0  7  0  0 |  e = containers
+  0  3  0  0  0  6  0 |  f = tableware
+  5  5  1  0  1  0 17 |  g = headlamps
+
+\end{verbatim}
+
+
+\subsubsection{class - one r}
+
+\begin{verbatim}
+=== Stratified cross-validation ===
+=== Summary ===
+
+Correctly Classified Instances         124               57.9439 %
+Incorrectly Classified Instances        90               42.0561 %
+Kappa statistic                          0.3946
+Mean absolute error                      0.1202
+Root mean squared error                  0.3466
+Relative absolute error                 56.7438 %
+Root relative squared error            106.8083 %
+Total Number of Instances              214
+
+=== Detailed Accuracy By Class ===
+
+                 TP Rate  FP Rate  Precision  Recall   F-Measure  MCC      ROC Area  PRC Area  Class
+                 0.786    0.299    0.561      0.786    0.655      0.459    0.744     0.511     build wind float
+                 0.579    0.268    0.543      0.579    0.561      0.307    0.655     0.464     build wind non-float
+                 0.000    0.000    0.000      0.000    0.000      0.000    0.500     0.079     vehic wind float
+                 0.000    0.000    0.000      0.000    0.000      0.000    ?         ?         vehic wind non-float
+                 0.231    0.000    1.000      0.231    0.375      0.469    0.615     0.277     containers
+                 0.000    0.000    0.000      0.000    0.000      0.000    0.500     0.042     tableware
+                 0.759    0.054    0.688      0.759    0.721      0.676    0.852     0.554     headlamps
+Weighted Avg.    0.579    0.200    0.530      0.579    0.534      0.379    0.690     0.432
+
+=== Confusion Matrix ===
+
+  a  b  c  d  e  f  g   <-- classified as
+ 55 15  0  0  0  0  0 |  a = build wind float
+ 26 44  0  0  0  0  6 |  b = build wind non-float
+ 12  5  0  0  0  0  0 |  c = vehic wind float
+  0  0  0  0  0  0  0 |  d = vehic wind non-float
+  0  7  0  0  3  0  3 |  e = containers
+  3  5  0  0  0  0  1 |  f = tableware
+  2  5  0  0  0  0 22 |  g = headlamps
+\end{verbatim}
+
+
+\subsubsection{class - random forest}
+
+\begin{verbatim}
+=== Stratified cross-validation ===
+=== Summary ===
+
+Correctly Classified Instances         171               79.9065 %
+Incorrectly Classified Instances        43               20.0935 %
+Kappa statistic                          0.7229
+Mean absolute error                      0.1004
+Root mean squared error                  0.2123
+Relative absolute error                 47.4315 %
+Root relative squared error             65.4186 %
+Total Number of Instances              214
+
+=== Detailed Accuracy By Class ===
+
+                 TP Rate  FP Rate  Precision  Recall   F-Measure  MCC      ROC Area  PRC Area  Class
+                 0.871    0.118    0.782      0.871    0.824      0.734    0.934     0.861     build wind float
+                 0.816    0.116    0.795      0.816    0.805      0.696    0.926     0.874     build wind non-float
+                 0.353    0.020    0.600      0.353    0.444      0.426    0.931     0.514     vehic wind float
+                 0.000    0.000    0.000      0.000    0.000      0.000    ?         ?         vehic wind non-float
+                 0.846    0.010    0.846      0.846    0.846      0.836    0.985     0.907     containers
+                 0.778    0.005    0.875      0.778    0.824      0.818    0.998     0.963     tableware
+                 0.828    0.016    0.889      0.828    0.857      0.836    0.969     0.912     headlamps
+Weighted Avg.    0.799    0.084    0.794      0.799    0.793      0.720    0.941     0.852
+
+=== Confusion Matrix ===
+
+  a  b  c  d  e  f  g   <-- classified as
+ 61  7  2  0  0  0  0 |  a = build wind float
+  8 62  2  0  2  1  1 |  b = build wind non-float
+  8  3  6  0  0  0  0 |  c = vehic wind float
+  0  0  0  0  0  0  0 |  d = vehic wind non-float
+  0  1  0  0 11  0  1 |  e = containers
+  0  1  0  0  0  7  1 |  f = tableware
+  1  4  0  0  0  0 24 |  g = headlamps
+
+\end{verbatim}
+
+
+%% \bibliography{mybib}{}
+%% \bibliographystyle{unsrt}
+
+\end{document}
+
